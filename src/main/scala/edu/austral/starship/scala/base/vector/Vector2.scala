@@ -2,6 +2,7 @@ package edu.austral.starship.scala.base.vector
 
 import java.lang.Math.{atan2, cos, sin}
 
+
 import scala.language.postfixOps
 
 case class Vector2(x: Float, y: Float) {
@@ -19,6 +20,12 @@ case class Vector2(x: Float, y: Float) {
 }
 
 object Vector2 {
+  val ZERO: Vector2 = Vector2(0, 0)
+  val UP: Vector2 = Vector2(0, -1)
+  val DOWN: Vector2 = Vector2(0, 1)
+  val LEFT: Vector2 = Vector2(-1, 0)
+  val RIGHT: Vector2 = Vector2(1, 0)
+
   def fromModule(module: Float, angle: Float) = Vector2(module * cos(angle) toFloat, module * sin(angle) toFloat)
 }
 
