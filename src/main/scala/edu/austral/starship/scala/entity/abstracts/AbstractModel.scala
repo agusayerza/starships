@@ -9,6 +9,7 @@ abstract class AbstractModel(var position: Vector2)  extends Updatable with Obse
   var rotation: Float = 0
   var speed: Vector2 = Vector2(0,0)
   var acceleration: Vector2 = Vector2(0,0)
+
   def translate(speed: Vector2): Unit = position += speed
 
   def rotate(angle: Int): Unit = rotation += angle

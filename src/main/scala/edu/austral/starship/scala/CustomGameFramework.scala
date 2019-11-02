@@ -15,7 +15,6 @@ import scala.collection.mutable
 
 object CustomGameFramework extends GameFramework {
 
-  val screen:Screen = new Screen(800,600)
   var imageManager: ImageManager = _
   var imageLoader: ImageLoader = _
   var keyListeners: Set[KeyConfiguration] = mutable.HashSet().toSet
@@ -26,7 +25,7 @@ object CustomGameFramework extends GameFramework {
     imageManager = new ImageManager(imageLoader)
     this.imageLoader = imageLoader
 
-    windowsSettings.setSize(width = screen.width, height = screen.height)
+    windowsSettings.setSize(width = Screen.width, height = Screen.height)
     abstractControllers add StarshipFactory.make(Vector2(300, 300))
     abstractControllers add AsteroidFactory.make(Vector2(200, 200))
   }
@@ -44,7 +43,6 @@ object CustomGameFramework extends GameFramework {
     abstractControllers.foreach(c => {
       c.update(timeSinceLastDraw)
       Renderer.render(graphics, c.view)
-      //c.view.graphic.foreach(image => graphics.image(image, c.view.position.x, c.view.position.y, c.view.width, c.view.height))
     })
   }
 

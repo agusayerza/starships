@@ -2,8 +2,9 @@ package edu.austral.starship.scala
 
 import edu.austral.starship.scala.base.vector.Vector2
 
-class Screen(val width:Int, val height:Int) {
-
+object Screen {
+  val width:Int = 1200
+  val height:Int = 800
   def onScreen(point: Vector2): Boolean = 0 <= point.x && point.x <= width && point.y <= height && 0 <= point.y
 
   def farFarAway(point: Vector2): Boolean = {

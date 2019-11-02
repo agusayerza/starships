@@ -1,11 +1,12 @@
 package edu.austral.starship.scala.entity.starship
 
+import edu.austral.starship.scala.Screen
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractModel
 import edu.austral.starship.scala.input.PlayerAction
 import edu.austral.starship.scala.input.PlayerAction.PlayerAction
 
-class StarshipModel(position: Vector2) extends AbstractModel(position){
+class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
 
 
   override def update(time: Float): Unit = {
@@ -23,5 +24,13 @@ class StarshipModel(position: Vector2) extends AbstractModel(position){
     if (actions.contains(PlayerAction.RIGHT)) move = move + Vector2.RIGHT
     if (!(move == Vector2.ZERO)) move = move.unitary
     if (speed.module < 15) accelerate(move)
+  }
+
+  override def translate(speed: Vector2): Unit = {
+    super.translate(speed)
+    if(position.x < 0) position = Vector2(0, position.y)
+    if(position.x > Screen.width) position = Vector2(Screen.width, position.y)
+    if(position.y < 0) position = Vector2(position.x, 0)
+    if(position.y > Screen.height) position = Vector2(position.x, Screen.height)
   }
 }
