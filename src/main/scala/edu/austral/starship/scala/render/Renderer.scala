@@ -4,13 +4,18 @@ import edu.austral.starship.scala.entity.abstracts.AbstractView
 import processing.core.PGraphics
 
 object Renderer {
-  def render(graphics: PGraphics, abstractView: AbstractView): Unit ={
+  val renderColliders = true
+  def render(graphics: PGraphics, view: AbstractView): Unit ={
     graphics.imageMode(3)
     graphics.pushMatrix()
-    graphics.translate(abstractView.position.x, abstractView.position.y)
-    graphics.rotate(abstractView.rotation)
-    abstractView.graphic.foreach(g => {
+    graphics.translate(view.position.x, view.position.y)
+    graphics.rotate(view.rotation)
+    if(renderColliders){
+      graphics.ellipse(0, 0, 50, 50)
+    }
+    view.graphic.foreach(g => {
       if(g.draw) graphics.image(g.image, 0, 0, g.width, g.height)
+
     })
     graphics.popMatrix()
   }

@@ -1,8 +1,12 @@
 package edu.austral.starship.scala.entity.starship
 
+import java.awt.Shape
+
 import edu.austral.starship.scala.Screen
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractModel
+import edu.austral.starship.scala.entity.asteroid.AsteroidModel
+import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.input.PlayerAction
 import edu.austral.starship.scala.input.PlayerAction.PlayerAction
 
@@ -33,4 +37,8 @@ class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
     if(position.y < 0) position = Vector2(position.x, 0)
     if(position.y > Screen.height) position = Vector2(position.x, Screen.height)
   }
+
+  override def collisionedWith(collisionable: Collidable): Unit = {collisionable.collideWith(this)}
+
+  override def collideWith(collidable: AsteroidModel): Unit = println("collided with asteroid")
 }

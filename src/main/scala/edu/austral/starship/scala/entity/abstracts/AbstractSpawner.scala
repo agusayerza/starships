@@ -1,6 +1,7 @@
 package edu.austral.starship.scala.entity.abstracts
 
 import edu.austral.starship.scala.base.vector.Vector2
+import edu.austral.starship.scala.entity.EntityManager
 import edu.austral.starship.scala.{CustomGameFramework, Screen, Updatable}
 import edu.austral.starship.scala.entity.traits.Factory
 import edu.austral.starship.scala.util.RandomUtils
@@ -36,7 +37,7 @@ abstract class AbstractSpawner(val spawnRate: Float = 1500) extends Updatable wi
         position = Vector2(position.x + 100, position.y)
     }
 
-    CustomGameFramework.addController(make(position))
+    EntityManager.addController(make(position))
   }
 
   def spawn(): AbstractController = {
