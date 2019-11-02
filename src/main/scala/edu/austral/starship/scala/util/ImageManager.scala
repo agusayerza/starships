@@ -10,10 +10,14 @@ class ImageManager(imageLoader: ImageLoader) {
     var graphics = Array[PImage]()
     fileName.foreach(
       fileNameMapped => {
-        var image = imageLoader.load(graphicSrc + fileNameMapped)
+        var image = loadImage(graphicSrc + fileNameMapped)
         graphics = graphics :+ image
       }
     )
     graphics
+  }
+
+  def loadImage(fileName: String): PImage = {
+    imageLoader.load(graphicSrc + fileName)
   }
 }

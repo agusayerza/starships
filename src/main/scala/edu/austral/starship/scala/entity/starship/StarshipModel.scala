@@ -10,7 +10,8 @@ class StarshipModel(position: Vector2) extends AbstractModel(position){
 
   override def update(time: Float): Unit = {
     super.update(time)
-    speed = speed * (1 / time) * 90
+    speed = speed * Math.pow(0.999, time).asInstanceOf[Float]
+    if(speed.module < 0.05f) speed = Vector2.ZERO
   }
 
   def processPlayerActions(actions: Set[PlayerAction], time: Float): Unit = {

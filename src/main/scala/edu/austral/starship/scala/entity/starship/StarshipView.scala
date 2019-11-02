@@ -1,10 +1,19 @@
 package edu.austral.starship.scala.entity.starship
 
 import edu.austral.starship.scala.entity.abstracts.AbstractView
+import edu.austral.starship.scala.render.GraphicResource
 
-class StarshipView(model: StarshipModel) extends AbstractView(Array("starship-fire.png", "starship.png"), model, 50, 50){
+class StarshipView(model: StarshipModel) extends AbstractView(
+
+  Array(GraphicResource.loadFromFile("starship-fire.png", 100, 100, draw = false),
+    GraphicResource.loadFromFile("starship.png", 100, 100, draw = true)),
+
+  model){
+
+
+
   override def updateObserver(): Unit = {
     super.updateObserver()
-    renderView(0) = model.speed.y != 0 || model.speed.x != 0
+    graphic(0).draw = model.acceleration.module != 0
   }
 }

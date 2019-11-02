@@ -1,7 +1,7 @@
 package edu.austral.starship.scala.entity
 
-import processing.core.PImage
+import edu.austral.starship.scala.render.GraphicResource
 
-abstract class Renderable(val graphic:Array[PImage]) {
+abstract class Renderable(val graphic:Array[GraphicResource]) {
 
 }

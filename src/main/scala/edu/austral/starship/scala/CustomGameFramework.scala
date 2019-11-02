@@ -5,6 +5,7 @@ import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractController
 import edu.austral.starship.scala.entity.starship.StarshipFactory
 import edu.austral.starship.scala.input.KeyConfiguration
+import edu.austral.starship.scala.render.Renderer
 import edu.austral.starship.scala.util.ImageManager
 import processing.core.PGraphics
 import processing.event.KeyEvent
@@ -41,7 +42,8 @@ object CustomGameFramework extends GameFramework {
 
     abstractControllers.foreach(c => {
       c.update(timeSinceLastDraw)
-      c.view.graphic.foreach(image => graphics.image(image, c.view.position.x, c.view.position.y, c.view.width, c.view.height))
+      Renderer.render(graphics, c.view)
+      //c.view.graphic.foreach(image => graphics.image(image, c.view.position.x, c.view.position.y, c.view.width, c.view.height))
     })
   }
 
