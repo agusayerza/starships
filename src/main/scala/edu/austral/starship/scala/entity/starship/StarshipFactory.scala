@@ -2,9 +2,12 @@ package edu.austral.starship.scala.entity.starship
 
 import edu.austral.starship.scala.CustomGameFramework
 import edu.austral.starship.scala.base.vector.Vector2
+import edu.austral.starship.scala.entity.abstracts.AbstractController
+import edu.austral.starship.scala.entity.traits.Factory
 import edu.austral.starship.scala.input.{KeyConfiguration, KeyConfigurationImpl}
 
-object StarshipFactory {
+object StarshipFactory extends Factory[AbstractController]{
+
   def make(position: Vector2): StarshipController = {
     var model: StarshipModel = new StarshipModel(position)
     var view: StarshipView = new StarshipView(model)

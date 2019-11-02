@@ -10,8 +10,6 @@ class StarshipView(model: StarshipModel) extends AbstractView(
 
   model){
 
-
-
   override def updateObserver(): Unit = {
     super.updateObserver()
     graphic(0).draw = model.acceleration.module != 0

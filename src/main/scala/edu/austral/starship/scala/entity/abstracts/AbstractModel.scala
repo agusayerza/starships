@@ -16,11 +16,11 @@ abstract class AbstractModel(var position: Vector2)  extends Updatable with Obse
 
   override def update(time: Float): Unit = {
     notifyObserver()
+    speed += acceleration
     translate(speed)
   }
 
   def accelerate(amountToAccelerate: Vector2): Unit = {
-    speed += amountToAccelerate
     acceleration = amountToAccelerate
   }
 
