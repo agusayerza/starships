@@ -34,7 +34,6 @@ object CustomGameFramework extends GameFramework {
   }
 
   override def draw(graphics: PGraphics, timeSinceLastDraw: Float, keySet: Set[Int]): Unit = {
-
     keyListeners.foreach(listener => listener.setKeys(keySet))
 
     EntityManager.update(timeSinceLastDraw, graphics)

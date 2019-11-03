@@ -11,6 +11,7 @@ import scala.collection.mutable
 object KeyConfigurationImpl {
   def defaultConfiguration: KeyConfiguration = {
     val binds: util.Map[Integer, PlayerAction] = new util.HashMap[Integer, PlayerAction]
+    binds.put(32, PlayerAction.SHOOT)
     binds.put(37, PlayerAction.LEFT)
     binds.put(38, PlayerAction.UP)
     binds.put(39, PlayerAction.RIGHT)
@@ -23,6 +24,9 @@ class KeyConfigurationImpl private(val keyBinds: util.Map[Integer, PlayerAction]
   var keys: Set[Int] = mutable.Set[Int]().toSet
 
   private def getActionForKey(keyCode: Int): PlayerAction = {
+    if(keyCode == 32){
+      var a =0
+    }
     var playerAction: PlayerAction = PlayerAction.NONE
     if (keyBinds.containsKey(keyCode)) playerAction = keyBinds.get(keyCode)
     playerAction

@@ -37,7 +37,7 @@ abstract class AbstractSpawner(val spawnRate: Float = 1500) extends Updatable wi
         position = Vector2(position.x + 60, position.y)
     }
 
-    EntityManager.addController(make(position))
+    make(position)
   }
 
   def spawn(): AbstractController = {

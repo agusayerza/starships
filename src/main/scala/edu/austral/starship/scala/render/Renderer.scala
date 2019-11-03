@@ -4,7 +4,7 @@ import edu.austral.starship.scala.entity.abstracts.AbstractView
 import processing.core.PGraphics
 
 object Renderer {
-  val renderColliders = true
+  val renderColliders = false
   def render(graphics: PGraphics, view: AbstractView): Unit ={
     graphics.imageMode(3)
     if(renderColliders){

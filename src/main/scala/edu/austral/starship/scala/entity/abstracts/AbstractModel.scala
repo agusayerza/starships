@@ -3,7 +3,7 @@ package edu.austral.starship.scala.entity.abstracts
 import java.awt.Shape
 import java.awt.geom.{AffineTransform, Ellipse2D}
 
-import edu.austral.starship.scala.Updatable
+import edu.austral.starship.scala.{Screen, Updatable}
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.traits.{Collidable, Observable}
 
@@ -27,6 +27,9 @@ abstract class AbstractModel(var position: Vector2)  extends Updatable with Obse
     notifyObserver()
     speed += acceleration
     translate(speed)
+    if(Screen.farFarAway(this.position)){
+      destroyMe()
+    }
   }
 
   def accelerate(amountToAccelerate: Vector2): Unit = {
