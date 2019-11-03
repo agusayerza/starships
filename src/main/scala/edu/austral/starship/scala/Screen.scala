@@ -10,7 +10,7 @@ object Screen {
   def farFarAway(point: Vector2): Boolean = {
     val x = point.x
     val y = point.y
-    x < -200 || y < -200 || y > this.height + 200 || x > this.width + 200
+    x < -150 || y < -150 || y > this.height + 150 || x > this.width + 150
   }
 
   def getWidth: Int = width

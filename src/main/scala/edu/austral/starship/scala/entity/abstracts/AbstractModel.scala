@@ -1,7 +1,7 @@
 package edu.austral.starship.scala.entity.abstracts
 
 import java.awt.Shape
-import java.awt.geom.Ellipse2D
+import java.awt.geom.{AffineTransform, Ellipse2D}
 
 import edu.austral.starship.scala.Updatable
 import edu.austral.starship.scala.base.vector.Vector2
@@ -12,14 +12,16 @@ abstract class AbstractModel(var position: Vector2)  extends Updatable with Obse
   var rotation: Float = 0
   var speed: Vector2 = Vector2(0,0)
   var acceleration: Vector2 = Vector2(0,0)
+  var colliderWidth : Float
+  var colliderHeight : Float
 
   def translate(speed: Vector2): Unit = position += speed
 
-  def rotate(angle: Int): Unit = rotation += angle
+  def rotate(angle: Float): Unit = rotation += angle
 
   def destroyMe(): Unit = this.alive = false
 
-  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, 50, 50)
+  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, colliderWidth, colliderHeight)
 
   override def update(time: Float): Unit = {
     notifyObserver()

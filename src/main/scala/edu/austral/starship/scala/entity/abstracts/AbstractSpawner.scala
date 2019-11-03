@@ -25,16 +25,16 @@ abstract class AbstractSpawner(val spawnRate: Float = 1500) extends Updatable wi
     screenCast match {
       case 0 =>
         position = Screen.toScreenTop(position)
-        position = Vector2(position.x, position.y - 100)
+        position = Vector2(position.x, position.y - 60)
       case 1 =>
         position = Screen.toScreenBottom(position)
-        position = Vector2(position.x, position.y + 100)
+        position = Vector2(position.x, position.y + 60)
       case 2 =>
         position = Screen.toScreenLeft(position)
-        position = Vector2(position.x - 100, position.y)
+        position = Vector2(position.x - 60, position.y)
       case 3 =>
         position = Screen.toScreenRight(position)
-        position = Vector2(position.x + 100, position.y)
+        position = Vector2(position.x + 60, position.y)
     }
 
     EntityManager.addController(make(position))

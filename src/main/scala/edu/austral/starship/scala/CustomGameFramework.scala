@@ -29,7 +29,7 @@ object CustomGameFramework extends GameFramework {
 
     windowsSettings.setSize(width = Screen.width, height = Screen.height)
     EntityManager.addController(StarshipFactory.make(Vector2(300, 300)))
-    EntityManager.addController(AsteroidFactory.make(Vector2( 500, 500)))
+    EntityManager.addController(AsteroidFactory.make(Vector2( -300, -500)))
 
   }
 

@@ -12,6 +12,8 @@ import edu.austral.starship.scala.input.PlayerAction.PlayerAction
 
 class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
 
+  override var colliderWidth: Float = 60
+  override var colliderHeight: Float = 40
 
   override def update(time: Float): Unit = {
     super.update(time)

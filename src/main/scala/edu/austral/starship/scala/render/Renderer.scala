@@ -7,12 +7,12 @@ object Renderer {
   val renderColliders = true
   def render(graphics: PGraphics, view: AbstractView): Unit ={
     graphics.imageMode(3)
+    if(renderColliders){
+      graphics.ellipse(view.position.x, view.position.y, view.model.colliderWidth, view.model.colliderHeight)
+    }
     graphics.pushMatrix()
     graphics.translate(view.position.x, view.position.y)
     graphics.rotate(view.rotation)
-    if(renderColliders){
-      graphics.ellipse(0, 0, 50, 50)
-    }
     view.graphic.foreach(g => {
       if(g.draw) graphics.image(g.image, 0, 0, g.width, g.height)
 

@@ -25,6 +25,8 @@ object EntityManager {
       Renderer.render(graphics, c.view)
     })
 
+    println("Entities: " + abstractControllers.size)
+
     deleteDeadEntities()
 
   }
