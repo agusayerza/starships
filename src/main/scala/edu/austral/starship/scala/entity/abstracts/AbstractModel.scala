@@ -21,7 +21,7 @@ abstract class AbstractModel(var position: Vector2)  extends Updatable with Obse
 
   def destroyMe(): Unit = this.alive = false
 
-  override def getShape: Shape = new Ellipse2D.Float(position.x, position.y, colliderWidth, colliderHeight)
+  override def getShape: Shape = new Ellipse2D.Float(position.x - colliderWidth / 2.0f, position.y - colliderHeight / 2.0f, this.colliderWidth, this.colliderHeight)
 
   override def update(time: Float): Unit = {
     notifyObserver()

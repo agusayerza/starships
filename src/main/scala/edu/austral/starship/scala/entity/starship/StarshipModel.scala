@@ -28,7 +28,7 @@ class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
 
   def shoot(time: Float) : Unit = {
     if(timeSinceLastShot > SHOOT_INTERVAL){
-      BulletFactory.shoot(position, Vector2.UP)
+      BulletFactory.shoot(position, Vector2.UP * 4)
       timeSinceLastShot = 0
     }
   }

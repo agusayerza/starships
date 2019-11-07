@@ -10,6 +10,8 @@ import edu.austral.starship.scala.util.RandomUtils
 
 class AsteroidModel(created_position: Vector2) extends AbstractModel(created_position: Vector2){
   speed  = Vector2(RandomUtils.randomFloat(-1,1), RandomUtils.randomFloat(-1,1))
+  override var colliderWidth: Float = 40
+  override var colliderHeight: Float = 40
 
   override def collisionedWith(collisionable: Collidable): Unit = collisionable.collideWith(this)
 
@@ -23,6 +25,4 @@ class AsteroidModel(created_position: Vector2) extends AbstractModel(created_pos
     rotate(speed.module / 3)
   }
 
-  override var colliderWidth: Float = 40
-  override var colliderHeight: Float = 40
 }
