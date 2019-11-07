@@ -3,6 +3,7 @@ package edu.austral.starship.scala.entity
 import edu.austral.starship.scala.base.collision.CollisionEngine
 import edu.austral.starship.scala.entity.abstracts.{AbstractController, AbstractModel}
 import edu.austral.starship.scala.entity.asteroid.AsteroidFactory
+import edu.austral.starship.scala.entity.powerup.PowerUpFactory
 import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.render.Renderer
 import processing.core.PGraphics
@@ -18,6 +19,7 @@ object EntityManager {
 
   def update(time: Float, graphics: PGraphics): Unit = {
     AsteroidFactory.update(time)
+    PowerUpFactory.update(time)
     collisionEngine.checkCollisions(models.toList)
 
     abstractControllers.foreach(c => {
