@@ -7,8 +7,8 @@ import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractModel
 import edu.austral.starship.scala.entity.asteroid.AsteroidModel
 import edu.austral.starship.scala.entity.bullet.{BulletFactory, BulletModel}
-import edu.austral.starship.scala.entity.powerup.PowerUpModel
-import edu.austral.starship.scala.entity.starship.weapon.{SimpleWeapon, SpeedPowerUp, Weapon}
+import edu.austral.starship.scala.entity.powerup.{PowerUpModel, PowerUpType}
+import edu.austral.starship.scala.entity.starship.weapon.{SimpleWeapon, SpeedPowerUp, TripleShotPowerUp, Weapon}
 import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.input.PlayerAction
 import edu.austral.starship.scala.input.PlayerAction.PlayerAction
@@ -75,5 +75,12 @@ class StarshipModel(cposition: Vector2, val direction: Vector2, val playerID: In
     if(collidable.shooterId != this.playerID) looseLife()
   }
 
-  override def collideWith(collidable: PowerUpModel): Unit = this.weapon = new SpeedPowerUp(this.weapon)
+  override def collideWith(collidable: PowerUpModel): Unit = {
+    collidable.powerUpType match {
+      case PowerUpType.MULTIPLE =>
+        this.weapon = new TripleShotPowerUp(this.weapon)
+      case PowerUpType.SPEED =>
+        this.weapon = new SpeedPowerUp(this.weapon)
+    }
+  }
 }
