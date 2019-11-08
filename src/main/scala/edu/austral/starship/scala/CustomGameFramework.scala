@@ -1,7 +1,5 @@
 package edu.austral.starship.scala
 
-import edu.austral.starship.base.collision.Collisionable
-import edu.austral.starship.scala.base.collision.CollisionEngine
 import edu.austral.starship.scala.base.framework.{GameFramework, ImageLoader, WindowSettings}
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.EntityManager
@@ -9,7 +7,7 @@ import edu.austral.starship.scala.entity.abstracts.{AbstractController, Abstract
 import edu.austral.starship.scala.entity.asteroid.AsteroidFactory
 import edu.austral.starship.scala.entity.starship.StarshipFactory
 import edu.austral.starship.scala.entity.traits.Collidable
-import edu.austral.starship.scala.input.KeyConfiguration
+import edu.austral.starship.scala.input.{KeyConfiguration, KeyConfigurationImpl}
 import edu.austral.starship.scala.render.Renderer
 import edu.austral.starship.scala.util.ImageManager
 import processing.core.PGraphics
@@ -28,7 +26,8 @@ object CustomGameFramework extends GameFramework {
     this.imageLoader = imageLoader
 
     windowsSettings.setSize(width = Screen.width, height = Screen.height)
-    EntityManager.addController(StarshipFactory.make(Vector2(300, 300)))
+    EntityManager.addController(StarshipFactory.make(Vector2(300, 300), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration))
+    EntityManager.addController(StarshipFactory.make(Vector2(800, 800), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration))
     EntityManager.addController(AsteroidFactory.make(Vector2( 300, 500)))
 
   }

@@ -9,7 +9,7 @@ import processing.event.KeyEvent
 import scala.collection.mutable
 
 object KeyConfigurationImpl {
-  def defaultConfiguration: KeyConfiguration = {
+  def defaultPlayer1Configuration: KeyConfiguration = {
     val binds: util.Map[Integer, PlayerAction] = new util.HashMap[Integer, PlayerAction]
     binds.put(32, PlayerAction.SHOOT)
     binds.put(37, PlayerAction.LEFT)
@@ -18,15 +18,23 @@ object KeyConfigurationImpl {
     binds.put(40, PlayerAction.DOWN)
     new KeyConfigurationImpl(binds)
   }
+  def defaultPlayer2Configuration: KeyConfiguration = {
+    val binds: util.Map[Integer, PlayerAction] = new util.HashMap[Integer, PlayerAction]
+    binds.put(9, PlayerAction.SHOOT)
+    binds.put(65, PlayerAction.LEFT)
+    binds.put(87, PlayerAction.UP)
+    binds.put(68, PlayerAction.RIGHT)
+    binds.put(83, PlayerAction.DOWN)
+    new KeyConfigurationImpl(binds)
+  }
+
 }
 
 class KeyConfigurationImpl private(val keyBinds: util.Map[Integer, PlayerAction]) extends KeyConfiguration {
   var keys: Set[Int] = mutable.Set[Int]().toSet
 
   private def getActionForKey(keyCode: Int): PlayerAction = {
-    if(keyCode == 32){
-      var a =0
-    }
+    println(keyCode)
     var playerAction: PlayerAction = PlayerAction.NONE
     if (keyBinds.containsKey(keyCode)) playerAction = keyBinds.get(keyCode)
     playerAction
