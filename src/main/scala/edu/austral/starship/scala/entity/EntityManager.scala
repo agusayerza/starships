@@ -46,5 +46,8 @@ object EntityManager {
     abstractControllers.foreach(c => if(!c.model.alive) removeController(c))
   }
 
-
+  def clearAllEntities(): Unit ={
+    abstractControllers = new mutable.HashSet[AbstractController]()
+    models = new mutable.MutableList[AbstractModel]()
+  }
 }

@@ -26,9 +26,8 @@ object CustomGameFramework extends GameFramework {
     this.imageLoader = imageLoader
 
     windowsSettings.setSize(width = Screen.width, height = Screen.height)
-    EntityManager.addController(StarshipFactory.make(Vector2(300, 300), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration))
-    EntityManager.addController(StarshipFactory.make(Vector2(800, 800), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration))
-    EntityManager.addController(AsteroidFactory.make(Vector2( 300, 500)))
+    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 2.3f, Screen.height - 100), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration))
+    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 1.7f, 100), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration))
 
   }
 
@@ -52,5 +51,9 @@ object CustomGameFramework extends GameFramework {
 
   override def keyReleased(event: KeyEvent): Unit = {
 
+  }
+
+  def restartGame(): Unit ={
+    EntityManager.clearAllEntities()
   }
 }

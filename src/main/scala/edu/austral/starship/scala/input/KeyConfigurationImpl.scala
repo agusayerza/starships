@@ -34,7 +34,6 @@ class KeyConfigurationImpl private(val keyBinds: util.Map[Integer, PlayerAction]
   var keys: Set[Int] = mutable.Set[Int]().toSet
 
   private def getActionForKey(keyCode: Int): PlayerAction = {
-    println(keyCode)
     var playerAction: PlayerAction = PlayerAction.NONE
     if (keyBinds.containsKey(keyCode)) playerAction = keyBinds.get(keyCode)
     playerAction
