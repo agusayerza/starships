@@ -7,6 +7,8 @@ import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractModel
 import edu.austral.starship.scala.entity.asteroid.AsteroidModel
 import edu.austral.starship.scala.entity.bullet.BulletFactory
+import edu.austral.starship.scala.entity.powerup.PowerUpModel
+import edu.austral.starship.scala.entity.starship.weapon.{SimpleWeapon, SpeedPowerUp, Weapon}
 import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.input.PlayerAction
 import edu.austral.starship.scala.input.PlayerAction.PlayerAction
@@ -17,6 +19,7 @@ class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
   override var colliderHeight: Float = 40
   val SHOOT_INTERVAL:Float = 2000
   var timeSinceLastShot: Float= 0
+  var weapon: Weapon = new SimpleWeapon()
 
   override def update(time: Float): Unit = {
     super.update(time)
@@ -28,7 +31,7 @@ class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
 
   def shoot(time: Float) : Unit = {
     if(timeSinceLastShot > SHOOT_INTERVAL){
-      BulletFactory.shoot(position, Vector2.UP * 4)
+      weapon.shoot(position, Vector2.UP * 4)
       timeSinceLastShot = 0
     }
   }
@@ -54,5 +57,9 @@ class StarshipModel(cposition: Vector2) extends AbstractModel(cposition){
 
   override def collisionedWith(collisionable: Collidable): Unit = {collisionable.collideWith(this)}
 
-  override def collideWith(collidable: AsteroidModel): Unit = { /** todo: loose life **/}
+  override def collideWith(collidable: AsteroidModel): Unit = {
+    /** todo: loose life **/
+  }
+
+  override def collideWith(collidable: PowerUpModel): Unit = this.weapon = new SpeedPowerUp(this.weapon)
 }

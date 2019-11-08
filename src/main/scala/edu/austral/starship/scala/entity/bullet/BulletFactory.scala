@@ -14,7 +14,7 @@ object BulletFactory extends Factory[AbstractController]{
     controller
   }
 
-  def shoot(playerPosition: Vector2, direction: Vector2): Unit ={
+  def shoot(playerPosition: Vector2, direction: Vector2): BulletController ={
     val position: Vector2 = playerPosition + direction.unitary * 10
     var model: BulletModel = new BulletModel(position, direction)
     var view: BulletView = new BulletView(model)
