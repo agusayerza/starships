@@ -8,8 +8,8 @@ import edu.austral.starship.scala.input.{KeyConfiguration, KeyConfigurationImpl}
 
 object StarshipFactory extends Factory[AbstractController]{
 
-  def make(position: Vector2, direction: Vector2 , keyConfigurationImpl: KeyConfiguration): StarshipController = {
-    var model: StarshipModel = new StarshipModel(position, direction)
+  def make(position: Vector2, direction: Vector2 , keyConfigurationImpl: KeyConfiguration, id: Int): StarshipController = {
+    var model: StarshipModel = new StarshipModel(position, direction, id)
     var view: StarshipView = new StarshipView(model)
     val keyConfiguration: KeyConfiguration = keyConfigurationImpl
     CustomGameFramework.registerKeyListener(keyConfiguration)
@@ -17,7 +17,7 @@ object StarshipFactory extends Factory[AbstractController]{
   }
 
   override def make(position: Vector2): AbstractController = {
-    var model: StarshipModel = new StarshipModel(position, Vector2.UP)
+    var model: StarshipModel = new StarshipModel(position, Vector2.UP, 0)
     var view: StarshipView = new StarshipView(model)
     val keyConfiguration: KeyConfiguration = KeyConfigurationImpl.defaultPlayer1Configuration
     CustomGameFramework.registerKeyListener(keyConfiguration)

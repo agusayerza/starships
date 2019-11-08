@@ -4,7 +4,7 @@ import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.EntityManager
 import edu.austral.starship.scala.entity.abstracts.{AbstractController, AbstractSpawner}
 
-object AsteroidFactory extends AbstractSpawner(5000){
+object AsteroidFactory extends AbstractSpawner(2000){
 
   def make(position: Vector2): AsteroidController = {
     var model: AsteroidModel = new AsteroidModel(position)
@@ -12,7 +12,6 @@ object AsteroidFactory extends AbstractSpawner(5000){
     val controller: AsteroidController = new AsteroidController(model, view)
     EntityManager.addController(controller)
     controller
-
   }
 
 }

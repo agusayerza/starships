@@ -2,25 +2,26 @@ package edu.austral.starship.scala.entity.starship
 
 import java.awt.Shape
 
-import edu.austral.starship.scala.Screen
+import edu.austral.starship.scala.{CustomGameFramework, Screen}
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.abstracts.AbstractModel
 import edu.austral.starship.scala.entity.asteroid.AsteroidModel
-import edu.austral.starship.scala.entity.bullet.BulletFactory
+import edu.austral.starship.scala.entity.bullet.{BulletFactory, BulletModel}
 import edu.austral.starship.scala.entity.powerup.PowerUpModel
 import edu.austral.starship.scala.entity.starship.weapon.{SimpleWeapon, SpeedPowerUp, Weapon}
 import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.input.PlayerAction
 import edu.austral.starship.scala.input.PlayerAction.PlayerAction
 
-class StarshipModel(cposition: Vector2, val direction: Vector2) extends AbstractModel(cposition){
+class StarshipModel(cposition: Vector2, val direction: Vector2, val playerID: Int) extends AbstractModel(cposition){
 
   override var colliderWidth: Float = 60
   override var colliderHeight: Float = 40
-  val SHOOT_INTERVAL:Float = 2000
+  val SHOOT_INTERVAL:Float = 5000
   var timeSinceLastShot: Float= 0
+  var lifes: Int = 3
   rotation = direction.angle + Math.PI.asInstanceOf[Float] / 2f
-  var weapon: Weapon = new SimpleWeapon()
+  var weapon: Weapon = new SimpleWeapon(playerID)
 
   override def update(time: Float): Unit = {
     super.update(time)
@@ -59,7 +60,19 @@ class StarshipModel(cposition: Vector2, val direction: Vector2) extends Abstract
   override def collisionedWith(collisionable: Collidable): Unit = {collisionable.collideWith(this)}
 
   override def collideWith(collidable: AsteroidModel): Unit = {
-    /** todo: loose life **/
+    looseLife()
+  }
+
+  def looseLife(): Unit ={
+    this.lifes -= 1
+    if(lifes <= 0){
+      CustomGameFramework.restartGame()
+    }
+  }
+
+
+  override def collideWith(collidable: BulletModel): Unit = {
+    if(collidable.shooterId != this.playerID) looseLife()
   }
 
   override def collideWith(collidable: PowerUpModel): Unit = this.weapon = new SpeedPowerUp(this.weapon)
