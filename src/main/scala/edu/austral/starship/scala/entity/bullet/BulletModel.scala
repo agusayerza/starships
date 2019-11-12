@@ -6,15 +6,18 @@ import edu.austral.starship.scala.entity.asteroid.AsteroidModel
 import edu.austral.starship.scala.entity.starship.StarshipModel
 import edu.austral.starship.scala.entity.traits.Collidable
 
-class BulletModel(cposition: Vector2, val direction: Vector2 = Vector2.UP, val shooterId: Int = 0) extends AbstractModel(cposition: Vector2){
+class BulletModel(cposition: Vector2, val direction: Vector2 = Vector2.UP, val shooter: StarshipModel) extends AbstractModel(cposition: Vector2){
   speed = direction
-
+  val shooterId: Int = shooter.playerID
   override var colliderWidth: Float = 10
   override var colliderHeight: Float = 10
 
   override def collisionedWith(collisionable: Collidable): Unit = collisionable.collideWith(this)
 
-  override def collideWith(collidable: AsteroidModel): Unit = destroyMe()
+  override def collideWith(collidable: AsteroidModel): Unit = {
+    shooter.gainPoint()
+    destroyMe()
+  }
 
   override def collideWith(collidable: StarshipModel): Unit = {
     if(collidable.playerID != this.shooterId) destroyMe()

@@ -21,7 +21,8 @@ class StarshipModel(cposition: Vector2, val direction: Vector2, val playerID: In
   var timeSinceLastShot: Float= 0
   var lifes: Int = 3
   rotation = direction.angle + Math.PI.asInstanceOf[Float] / 2f
-  var weapon: Weapon = new SimpleWeapon(playerID)
+  var weapon: Weapon = new SimpleWeapon(this)
+  var points: Int = 0
 
   override def update(time: Float): Unit = {
     super.update(time)
@@ -69,6 +70,8 @@ class StarshipModel(cposition: Vector2, val direction: Vector2, val playerID: In
       CustomGameFramework.restartGame()
     }
   }
+
+  def gainPoint(): Unit = points += 1
 
 
   override def collideWith(collidable: BulletModel): Unit = {

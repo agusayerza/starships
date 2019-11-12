@@ -26,8 +26,7 @@ object CustomGameFramework extends GameFramework {
     this.imageLoader = imageLoader
 
     windowsSettings.setSize(width = Screen.width, height = Screen.height)
-    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 2.3f, Screen.height - 100), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration, 1))
-    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 1.7f, 100), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration, 2))
+    restartGame()
 
   }
 
@@ -55,7 +54,7 @@ object CustomGameFramework extends GameFramework {
 
   def restartGame(): Unit ={
     EntityManager.clearAllEntities()
-    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 2.3f, Screen.height - 100), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration, 1))
-    EntityManager.addController(StarshipFactory.make(Vector2(Screen.width / 1.7f, 100), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration,2))
+    EntityManager.addPlayer(StarshipFactory.make(Vector2(Screen.width / 2.3f, Screen.height - 100), Vector2.UP, KeyConfigurationImpl.defaultPlayer1Configuration, 1))
+    EntityManager.addPlayer(StarshipFactory.make(Vector2(Screen.width / 1.7f, 100), Vector2.DOWN, KeyConfigurationImpl.defaultPlayer2Configuration,2))
   }
 }

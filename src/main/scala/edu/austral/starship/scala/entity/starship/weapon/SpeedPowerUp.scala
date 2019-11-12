@@ -1,6 +1,7 @@
 package edu.austral.starship.scala.entity.starship.weapon
 import edu.austral.starship.scala.base.vector.Vector2
 import edu.austral.starship.scala.entity.bullet.BulletController
+import edu.austral.starship.scala.entity.starship.StarshipModel
 
 class SpeedPowerUp(cweapon: Weapon) extends WeaponPowerUp {
   override val weapon: Weapon = cweapon
@@ -10,4 +11,6 @@ class SpeedPowerUp(cweapon: Weapon) extends WeaponPowerUp {
     controller.changeSpeed(controller.model.speed * 2)
     controller
   }
+
+  override val player: StarshipModel = weapon.player
 }

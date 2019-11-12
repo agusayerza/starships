@@ -4,6 +4,7 @@ import edu.austral.starship.scala.base.collision.CollisionEngine
 import edu.austral.starship.scala.entity.abstracts.{AbstractController, AbstractModel}
 import edu.austral.starship.scala.entity.asteroid.AsteroidFactory
 import edu.austral.starship.scala.entity.powerup.PowerUpFactory
+import edu.austral.starship.scala.entity.starship.{StarshipController, StarshipModel}
 import edu.austral.starship.scala.entity.traits.Collidable
 import edu.austral.starship.scala.render.Renderer
 import processing.core.PGraphics
@@ -16,7 +17,7 @@ object EntityManager {
 
   var abstractControllers: mutable.HashSet[AbstractController] = new mutable.HashSet[AbstractController]()
   var models: mutable.MutableList[AbstractModel] = new mutable.MutableList[AbstractModel]()
-
+  var players: mutable.MutableList[StarshipController] = new mutable.MutableList[StarshipController]()
   def update(time: Float, graphics: PGraphics): Unit = {
     AsteroidFactory.update(time)
     PowerUpFactory.update(time)
@@ -25,6 +26,7 @@ object EntityManager {
     abstractControllers.foreach(c => {
       c.update(time)
       Renderer.render(graphics, c.view)
+      Renderer.renderPoints(graphics, players)
     })
 
     deleteDeadEntities()
@@ -35,6 +37,11 @@ object EntityManager {
     abstractControllers add c
     models += c.model
     c
+  }
+
+  def addPlayer(p: StarshipController) : AbstractController = {
+    players += p
+    addController(p)
   }
 
   def removeController(c: AbstractController) : Unit = {
@@ -49,5 +56,6 @@ object EntityManager {
   def clearAllEntities(): Unit ={
     abstractControllers = new mutable.HashSet[AbstractController]()
     models = new mutable.MutableList[AbstractModel]()
+    players = new mutable.MutableList[StarshipController]
   }
 }
